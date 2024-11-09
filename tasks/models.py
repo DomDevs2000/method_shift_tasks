@@ -14,8 +14,7 @@ class Tasks(models.Model):
         delta: timedelta = self.end_date - self.start_date
         days: int = delta.days
         hours: int = delta.seconds // 3600
-        minutes: int = (delta.seconds % 3600) // 60
-        return f"{days} days, {hours} hours, {minutes} minutes"
+        return f"{days} days, {hours} hours"
 
     def __str__(self) -> str:
         return str(self.task_name)
