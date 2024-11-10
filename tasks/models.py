@@ -1,8 +1,9 @@
 from datetime import timedelta
 
+from celery import shared_task
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models.fields import CharField, DateField
+from django.db.models.fields import CharField, DateField, FloatField
 
 
 class Task(models.Model):
@@ -42,7 +43,34 @@ class Task(models.Model):
         if self.end_date < self.start_date:
             raise ValidationError("End date must be after start date.")
         if self.start_date == self.end_date:
-            raise ValidationError("Start date and time must be after end date and time.")
+            raise ValidationError(
+                "Start date and time must be after end date and time."
+            )
         return self.end_date
+
     def __str__(self) -> str:
         return str(self.task_name)
+
+
+class Metric(models.Model):
+    # average_cycle_time: FloatField = models.FloatField()
+    name: CharField = models.CharField(max_length=20, null=True, unique=True)
+    value = models.FloatField()
+    # name: str = models.CharField()
+
+    @classmethod
+    def update_average_cycle_time(cls, average_cycle_time):
+        try:
+            instance = Metric.objects.get(
+                name="average_cycle_time",
+            )
+            instance.value = average_cycle_time
+            instance.save(update_fields=["value"])
+        except Metric.DoesNotExist:
+            instance = Metric.objects.create(
+                name="average_cycle_time", value=average_cycle_time
+            )
+        return instance
+
+    def __str__(self) -> str:
+        return str(self.name)

@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 
 from .forms import TaskForm
 from .models import Task
+from .tasks import calculate_average_cycle_time
 
 
 def create_task(request: HttpRequest):
@@ -11,6 +12,7 @@ def create_task(request: HttpRequest):
         form: TaskForm = TaskForm(request.POST)
         if form.is_valid():
             form.save()
+            calculate_average_cycle_time.delay()
             return redirect("get_all_tasks")
     else:
         form: TaskForm = TaskForm()
