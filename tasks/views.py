@@ -1,11 +1,12 @@
 # Create your views here.
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
-
 from django.views.decorators.cache import cache_page
+
 from .forms import TaskForm
 from .models import Task
 
-from django.http import HttpRequest
+
 def create_task(request: HttpRequest):
     if request.method == "POST":
         form: TaskForm = TaskForm(request.POST)
