@@ -41,7 +41,8 @@ class Task(models.Model):
     def clean(self):
         if self.end_date < self.start_date:
             raise ValidationError("End date must be after start date.")
+        if self.start_date == self.end_date:
+            raise ValidationError("Start date and time must be after end date and time.")
         return self.end_date
-
     def __str__(self) -> str:
         return str(self.task_name)
