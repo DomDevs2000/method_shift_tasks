@@ -6,7 +6,7 @@ from django.conf import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'method_shift.settings')
 
-app = Celery('method_shift') 
+app = Celery('tasks') 
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
