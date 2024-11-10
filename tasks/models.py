@@ -21,8 +21,8 @@ class Task(models.Model):
 
     @classmethod
     def average_cycle_time(cls, tasks) -> float:
-        total_seconds = 0
-        task_count = tasks.count()
+        total_seconds: float = 0
+        task_count: int = tasks.count()
 
         if task_count == 0:
             return 0
@@ -31,10 +31,10 @@ class Task(models.Model):
             delta: timedelta = task.end_date - task.start_date
             total_seconds += delta.total_seconds()
 
-        average_seconds = total_seconds / task_count
-        average_delta = timedelta(seconds=average_seconds)
-        average_days = average_delta.days
-        average_hours = average_delta.seconds // 3600
+        average_seconds: float = total_seconds / task_count
+        average_delta: timedelta = timedelta(seconds=average_seconds)
+        average_days: int = average_delta.days
+        average_hours: int = average_delta.seconds // 3600
 
         return average_days + (average_hours / 24)
 
