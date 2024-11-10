@@ -1,0 +1,32 @@
+services:
+  tasks:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  celery:
+    build: .
+    command: celery -A tasks worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+
+  flower:
+    image: "mher/flower"
+    ports:
+      - "5555:5555"
+    depends_on:
+      - tasks
+      - celery
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0

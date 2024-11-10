@@ -2,3 +2,4 @@ django
 pytest
 pytest-django
 celery
+redis
