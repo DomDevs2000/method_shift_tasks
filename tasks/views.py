@@ -17,6 +17,7 @@ def create_task(request: HttpRequest):
     return render(request, "create_task.html", {"form": form})
 
 
+@cache_page(60*15)
 def get_all_tasks(request: HttpRequest):
     tasks: Task = Task.objects.all()
     return render(request, "all_tasks.html", {"tasks": tasks})
