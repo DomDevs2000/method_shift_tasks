@@ -1,13 +1,4 @@
 django
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 pytest
 pytest-django
-=======
 pymemcache
-pytest
->>>>>>> Stashed changes
-=======
-pymemcache
-pytest
->>>>>>> Stashed changes
