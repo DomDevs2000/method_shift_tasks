@@ -1,6 +1,9 @@
+from datetime import timedelta
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.fields import CharField, DateField
-from datetime import timedelta
+
 
 class Task(models.Model):
     task_name: CharField = models.CharField(max_length=255)
@@ -15,11 +18,12 @@ class Task(models.Model):
         days: int = delta.days
         hours: int = delta.seconds // 3600
         return f"{days} days, {hours} hours"
+
     @classmethod
-    def average_cycle_time(cls,tasks) -> float:
+    def average_cycle_time(cls, tasks) -> float:
         total_seconds = 0
         task_count = tasks.count()
-        
+
         if task_count == 0:
             return 0
 
@@ -33,5 +37,11 @@ class Task(models.Model):
         average_hours = average_delta.seconds // 3600
 
         return average_days + (average_hours / 24)
+
+    def clean(self):
+        if self.end_date < self.start_date:
+            raise ValidationError("End date must be after start date.")
+        return self.end_date
+
     def __str__(self) -> str:
         return str(self.task_name)
