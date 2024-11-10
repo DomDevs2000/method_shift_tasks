@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+  <h1>Oops!</h1>
+{% if error %}
+  
+  <p>{{ error }}</p>
+    
+  {% else %}
+
+  <p>The page you're looking for doesn't exist.</p>
+
+{% endif %}
+
+  <a href="{% url 'create_task' %}">Create New Task</a>
+
+{% endblock %}

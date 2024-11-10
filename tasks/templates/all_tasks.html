@@ -1,21 +1,33 @@
-    <h1>Tasks</h1>
-    <table border="1">
-    <thead>
-        <tr>
-            <th>Task Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Cycle Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-            <tr data-id="{{ task.id }}">
-                <td><a href="{% url 'task_by_id' task.pk %}">{{ task.task_name }}</a></td>
-                <td>{{ task.start_date|date:"M d, Y" }}</td>
-                <td>{{ task.end_date|date:"M d, Y" }}</td>
-                <td>{{ task.cycle_time }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>    <a href="{% url 'create_task' %}">Create New Task</a>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tasks</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Task Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Cycle Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr data-id="{{ task.id }}">
+      <td><a href="{% url 'task_by_id' task.pk %}">{{ task.task_name }}</a></td>
+      <td>{{ task.start_date|date:"M d, Y" }}</td>
+      <td>{{ task.end_date|date:"M d, Y" }}</td>
+      <td>{{ task.cycle_time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'create_task' %}">Create New Task</a>
+
+{% if average_cycle_time %} 
+
+<p>{{ average_cycle_time }}</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,7 +1,6 @@
 # Create your views here.
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from django.views.decorators.cache import cache_page
 
 from .forms import TaskForm
 from .models import Task
@@ -20,9 +19,26 @@ def create_task(request: HttpRequest):
 
 def get_all_tasks(request: HttpRequest):
     tasks: Task = Task.objects.all()
-    return render(request, "all_tasks.html", {"tasks": tasks})
+
+    if not tasks:
+
+        return render(request, "404.html", status=404)
+    average_cycle = Task.average_cycle_time(tasks)
+
+    return render(
+        request, "all_tasks.html", {"tasks": tasks, "average_cycle_time": average_cycle}
+    )
 
 
 def get_task_by_id(request: HttpRequest, pk: int):
-    task: Task = Task.objects.get(pk=pk)
-    return render(request, "task_by_id.html", {"task": task})
+    try:
+        task: Task = Task.objects.get(pk=pk)
+
+        return render(request, "task_by_id.html", {"task": task})
+    except Task.DoesNotExist:
+
+        return render(request, "404.html", {"error": "No task found"}, status=404)
+
+
+def error_404_view(request: HttpRequest, exception):
+    return render(request, "404.html", status=404)

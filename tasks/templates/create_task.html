@@ -1,13 +1,11 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Create Task</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+
+{% block content %}
     <h1>Create Task</h1>
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Create</button>
     </form>
-  </body>
-</html>
+
+{% endblock %}

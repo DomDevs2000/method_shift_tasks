@@ -1,13 +1,9 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Task Detail</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>{{ task.task_name }}</h1>
     <p>Start Date: {{ task.start_date }}</p>
     <p>End Date: {{ task.end_date }}</p>
     <p>Cycle Time: {{ task.cycle_time }}</p>
     <a href="{% url 'get_all_tasks' %}">Back to Tasks List</a>
-  </body>
-</html>
+{% endblock %}
