@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.fields import CharField, DateField
 
 
-class Tasks(models.Model):
+class Task(models.Model):
     task_name: CharField = models.CharField(max_length=255)
     start_date: DateField = models.DateTimeField()
     end_date: DateField = models.DateTimeField()

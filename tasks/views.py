@@ -1,8 +1,9 @@
 # Create your views here.
 from django.shortcuts import redirect, render
 
+from django.views.decorators.cache import cache_page
 from .forms import TaskForm
-from .models import Tasks
+from .models import Task
 
 from django.http import HttpRequest
 def create_task(request: HttpRequest):
@@ -17,10 +18,10 @@ def create_task(request: HttpRequest):
 
 
 def get_all_tasks(request: HttpRequest):
-    tasks: Task = Tasks.objects.all()
+    tasks: Task = Task.objects.all()
     return render(request, "all_tasks.html", {"tasks": tasks})
 
 
 def get_task_by_id(request: HttpRequest, pk: int):
-    task: Task = Tasks.objects.get(pk=pk)
+    task: Task = Task.objects.get(pk=pk)
     return render(request, "task_by_id.html", {"task": task})
