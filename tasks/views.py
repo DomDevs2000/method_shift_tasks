@@ -23,7 +23,6 @@ def get_all_tasks(request: HttpRequest):
     tasks: Task = Task.objects.all()
 
     if not tasks:
-
         return render(request, "404.html", status=404)
     average_cycle = Task.average_cycle_time(tasks)
 
