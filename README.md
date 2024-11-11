@@ -23,7 +23,7 @@
 
 ## Running the Application with Docker
 
-The entire application is dockerized as Celery, Redis and Flower are also being used. To note, I included the sqlite file so the information displayed in the screenshots is the same if you run the app.
+The entire application is dockerized as Celery, Redis and Flower are also being used. To note, I included the sqlite file so the information displayed in the screenshots is the same if you run the app. Additionally the Django secret key is still visible in settings.py file (however there is no encryption logic in this project) I've kept this in to ensure no build-related issues if repo is cloned.
 
 First clone the repo and run:
 
@@ -120,16 +120,16 @@ celery, flower and redis without the need to run these commands separately.
 
 ## Things I would implement if I had more time / knowledge of Django
 
-###  Styling:
+### Styling:
 
 I would use a more customisable styling framework such as tailwind etc.
 
-###  Additional metrics and visualisation:
+### Additional metrics and visualisation:
 
 I would implement additional metrics that a user can use, additionally I would've liked to create data visualisation for
 these metrics (similar to Mission Control).
 
-###  Caching:
+### Caching:
 
 I had implemented caching on a GET all tasks request to cache, see 'caching'
 branch: https://github.com/DomDevs2000/method_shift_tasks/tree/caching
