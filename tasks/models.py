@@ -23,12 +23,12 @@ class Task(models.Model):
     @classmethod
     def average_cycle_time(cls, tasks) -> float:
         total_seconds: float = 0
-        task_count: int = tasks.count()
+        task_count: int = len(tasks)
 
         if task_count == 0:
             return 0
 
-        for task in tasks.all():
+        for task in tasks:
             delta: timedelta = task.end_date - task.start_date
             total_seconds += delta.total_seconds()
 
@@ -44,7 +44,7 @@ class Task(models.Model):
             raise ValidationError("End date must be after start date.")
         if self.start_date == self.end_date:
             raise ValidationError(
-                "Start date and time must be after end date and time."
+                "Start date and time must be different to end date and time."
             )
         return self.end_date
 
