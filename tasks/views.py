@@ -22,7 +22,7 @@ def create_task(request: HttpRequest) -> HttpResponse:
 
 def get_all_tasks(request: HttpRequest)-> HttpResponse:
     tasks: Task = Task.objects.all()
-    paginator: Paginator = Paginator(tasks, 15)
+    paginator: Paginator = Paginator(tasks, 10)
     page = request.GET.get('page')
     try:
         tasks: Task = paginator.page(page)
