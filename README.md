@@ -23,7 +23,7 @@
 
 ## Running the Application with Docker
 
-The entire application is dockerized as Celery, Redis and Flower are also being used.
+The entire application is dockerized as Celery, Redis and Flower are also being used. To note, I included the sqlite file so the information displayed in the screenshots is the same if you run the app.
 
 First clone the repo and run:
 
@@ -35,7 +35,6 @@ then:
 
 ```
 docker compose up -d
-
 ```
 
 The container will run the django application, Celery, Redis and Flower.
@@ -45,7 +44,7 @@ The container will run the django application, Celery, Redis and Flower.
 Go to localhost:8000/tasks/
 
 Here you will see all tasks, including task name, start and end date, as well as the cycle time. The tasks are
-paginatated and users can go to the desired pages uses the corresponding links.
+paginated and users can go to the desired pages uses the corresponding links.
 ![all_tasks.png](screenshots/all_tasks.png)
 
 #### Creating a new Task
