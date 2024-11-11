@@ -28,7 +28,7 @@
             <a href="?page=1">&laquo; first</a>
             <a href="?page={{ tasks.previous_page_number }}">previous</a>
         {% endif %}
-        <span class="current">
+        <span>
             Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
         </span>
         {% if tasks.has_next %}
@@ -37,6 +37,9 @@
         {% endif %}
     </span>
     </div>
+    <br>
+    
+    </br>
     <div>
         <a href="{% url 'create_task' %}">Create New Task</a>
     </div>
