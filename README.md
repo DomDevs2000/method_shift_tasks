@@ -121,16 +121,16 @@ celery, flower and redis without the need to run these commands separately.
 
 ## Things I would implement if I had more time / knowledge of Django
 
-## Styling:
+###  Styling:
 
 I would use a more customisable styling framework such as tailwind etc.
 
-## Additional metrics and visualisation:
+###  Additional metrics and visualisation:
 
 I would implement additional metrics that a user can use, additionally I would've liked to create data visualisation for
 these metrics (similar to Mission Control).
 
-## Caching:
+###  Caching:
 
 I had implemented caching on a GET all tasks request to cache, see 'caching'
 branch: https://github.com/DomDevs2000/method_shift_tasks/tree/caching
