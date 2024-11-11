@@ -53,11 +53,9 @@ class Task(models.Model):
 
 
 class Metric(models.Model):
-    # average_cycle_time: FloatField = models.FloatField()
     name: CharField = models.CharField(max_length=20, null=True, unique=True)
     value = models.FloatField()
 
-    # name: str = models.CharField()
 
     @classmethod
     def update_average_cycle_time(cls, average_cycle_time):
