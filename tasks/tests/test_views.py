@@ -1,9 +1,10 @@
 import datetime
+from unittest.mock import patch
 
 import pytest
 from django.http import HttpResponse
 from django.test import RequestFactory
-from unittest.mock import patch
+
 from tasks.models import Task
 from tasks.views import (create_task, error_404_view, get_all_tasks,
                          get_task_by_id)
@@ -16,12 +17,12 @@ class TestViews:
         self.factory = RequestFactory()
 
         task1 = Task(
-            start_date= datetime.datetime(2020, 1, 1),
-            end_date= datetime.datetime(2020, 1, 5),
+            start_date=datetime.datetime(2020, 1, 1),
+            end_date=datetime.datetime(2020, 1, 5),
         )
         task2 = Task(
             start_date=datetime.datetime(2020, 1, 3),
-            end_date= datetime.datetime(2020, 1, 7),
+            end_date=datetime.datetime(2020, 1, 7),
         )
         tasks = [task1, task2]
 
@@ -29,7 +30,7 @@ class TestViews:
 
     @patch("tasks.tasks.calculate_average_cycle_time.delay")
     def test_create_task_view(self, mock_task=None):
-        form_data={
+        form_data = {
             "task_name": "Test Task",
             "start_date": "2020-01-01:00:00",
             "end_date": "2020-01-05:00:00",

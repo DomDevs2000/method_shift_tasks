@@ -56,7 +56,6 @@ class Metric(models.Model):
     name: CharField = models.CharField(max_length=20, null=True, unique=True)
     value = models.FloatField()
 
-
     @classmethod
     def update_average_cycle_time(cls, average_cycle_time):
         try:

@@ -1,5 +1,6 @@
 from celery import shared_task
-from .models import Task, Metric
+
+from .models import Metric, Task
 
 
 @shared_task
